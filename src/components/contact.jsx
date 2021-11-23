@@ -1,16 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Contact = ({ contact, onUserDetails }) => {
   return (
     <div className="card m-2">
       <h5 className="card-header">
-        <a
-          href="#"
-          className="card-link"
-          onClick={() => onUserDetails(contact)}
-        >
+        <Link to={`/user/${contact.id}`} className="card-link">
           {contact.username}
-        </a>
+        </Link>
       </h5>
       <div className="card-body">
         <h5 className="card-title">{contact.name}</h5>

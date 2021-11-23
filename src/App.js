@@ -1,8 +1,10 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/navbar";
-import Contact from "./components/contact";
+import Home from "./components/home";
+import User from "./components/user";
 
 class App extends React.Component {
   state = {
@@ -13,15 +15,15 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Navbar />
-        <main className="container">
-          {this.state.contacts.map((contact) => (
-            <Contact
-              key={contact.id}
-              contact={contact}
-              onUserDetails={this.handleUserDetails}
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home contacts={this.state.contacts} />} />
+            <Route
+              path="/user/:userId"
+              element={<User users={this.state.contacts} />}
             />
-          ))}
-        </main>
+          </Routes>
+        </Router>
       </React.Fragment>
     );
   }
@@ -37,6 +39,7 @@ class App extends React.Component {
 
   handleUserDetails = (contact) => {
     console.log(contact);
+    this.setState({ user: contact });
   };
 }
 
